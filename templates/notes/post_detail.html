@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ post.title }} | Neo Ni
+{% endblock %}
+
+{% block content %}
+<article>
+    <header class="page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <p class="section-eyebrow">
+                        Note
+                    </p>
+
+                    <h1 class="display-3 fw-bold">
+                        {{ post.title }}
+                    </h1>
+
+                    <p class="text-secondary">
+                        Published {{ post.published_at|date:"j F Y" }}
+                    </p>
+
+                    {% if post.summary %}
+                    <p class="lead text-secondary">
+                        {{ post.summary }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="note-detail-image mb-5">
+                    {% endif %}
+
+                    <div class="note-content">
+                        {{ post.body|linebreaks }}
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="{% url 'notes:list' %}" class="btn btn-outline-light">
+                            Back to Notes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+{% endblock %}
