@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | Neo Ni{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-lg-9">
+                <p class="section-eyebrow">
+                    Portfolio
+                </p>
+
+                <h1 class="display-3 fw-bold">
+                    Projects and technical case studies
+                </h1>
+
+                <p class="lead text-secondary page-description">
+                    Selected work covering backend development,
+                    cloud systems, web applications and data tooling.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        {% if projects %}
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-12 col-md-6">
+                <article class="project-card h-100">
+                    {% if project.thumbnail %}
+                    <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-thumbnail">
+                    {% endif %}
+
+                    <div class="project-card-body">
+                        <div class="d-flex flex-wrap justify-content-between gap-2">
+                            <p class="project-type">
+                                {{ project.get_status_display }}
+                            </p>
+
+                            {% if project.created_at %}
+                            <p class="project-date">
+                                {{ project.created_at|date:"Y" }}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <h2 class="h3">
+                            {{ project.title }}
+                        </h2>
+
+                        <p>
+                            {{ project.short_description }}
+                        </p>
+
+                        {% if project.technology_list %}
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            {% for technology in project.technology_list %}
+                            <span class="badge project-badge">
+                                {{ technology }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-4">
+                            <a href="{{ project.get_absolute_url }}" class="btn btn-outline-light">
+                                View case study
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state text-center p-5">
+            <h2 class="h3">
+                No projects published
+            </h2>
+
+            <p class="text-secondary mb-0">
+                Projects can be added through Django Admin.
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
