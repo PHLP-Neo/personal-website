@@ -153,7 +153,13 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = (
+        os.getenv(
+            "DJANGO_SECURE_SSL_REDIRECT",
+            "True",
+        ).lower()
+        == "true"
+    )
 
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
