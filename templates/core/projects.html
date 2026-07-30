@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | Neo Ni{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <p class="eyebrow">Portfolio</p>
+
+        <h1>Projects and technical case studies</h1>
+
+        <p class="page-introduction">
+            Selected work covering backend development, cloud systems,
+            web applications and data tooling.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="project-grid">
+            <article class="project-card">
+                <p class="project-type">Django</p>
+                <h2>CS50W Image Gallery</h2>
+
+                <p>
+                    Image uploads, tagging, comments, favourites,
+                    authentication and pagination.
+                </p>
+
+                <ul class="tag-list">
+                    <li>Python</li>
+                    <li>Django</li>
+                    <li>SQLite</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <p class="project-type">Cloud native</p>
+                <h2>YOLO FastAPI API</h2>
+
+                <p>
+                    A containerised inference platform with batching,
+                    Kubernetes deployment and load testing.
+                </p>
+
+                <ul class="tag-list">
+                    <li>FastAPI</li>
+                    <li>Docker</li>
+                    <li>Kubernetes</li>
+                    <li>Terraform</li>
+                    <li>Ansible</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <p class="project-type">Multi-cloud</p>
+                <h2>Aussie EcoLens</h2>
+
+                <p>
+                    A media application spanning AWS, Google Cloud
+                    and Azure services.
+                </p>
+
+                <ul class="tag-list">
+                    <li>AWS</li>
+                    <li>GCP</li>
+                    <li>Azure</li>
+                    <li>Next.js</li>
+                    <li>Serverless</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <p class="project-type">Automation</p>
+                <h2>Dwarf Fortress Wiki Scraper</h2>
+
+                <p>
+                    A configurable Python scraper that extracts matching
+                    sentences from linked wiki pages into CSV files.
+                </p>
+
+                <ul class="tag-list">
+                    <li>Python</li>
+                    <li>BeautifulSoup</li>
+                    <li>Regex</li>
+                    <li>CSV</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
