@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 from projects.models import Project
 
@@ -19,3 +20,11 @@ def home(request):
 
 def about(request):
     return render(request, "core/about.html")
+
+
+def health(request):
+    return JsonResponse(
+        {
+            "status": "ok",
+        }
+    )
