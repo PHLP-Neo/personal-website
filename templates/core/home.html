@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Neo Ni{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-content">
+        <p class="eyebrow">
+            Backend · Cloud · Data
+        </p>
+
+        <h1>
+            Building practical software and cloud systems.
+        </h1>
+
+        <p class="hero-description">
+            I am Neo Ni, a Master of Information Technology student
+            based in Melbourne. My work focuses on backend development,
+            cloud infrastructure, web applications and data.
+        </p>
+
+        <div class="button-group">
+            <a href="{% url 'core:projects' %}" class="button button-primary">
+                View projects
+            </a>
+
+            <a href="{% url 'core:contact' %}" class="button button-secondary">
+                Contact
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="eyebrow">Selected work</p>
+            <h2>Featured projects</h2>
+        </div>
+
+        <div class="project-grid">
+            <article class="project-card">
+                <p class="project-type">Web application</p>
+                <h3>CS50W Image Gallery</h3>
+
+                <p>
+                    A Django image-sharing application with uploads,
+                    tags, comments, favourites and authentication.
+                </p>
+
+                <a href="{% url 'core:projects' %}">
+                    View project
+                </a>
+            </article>
+
+            <article class="project-card">
+                <p class="project-type">Cloud infrastructure</p>
+                <h3>YOLO FastAPI Platform</h3>
+
+                <p>
+                    A containerised image-inference API deployed using
+                    Kubernetes, Terraform and Ansible.
+                </p>
+
+                <a href="{% url 'core:projects' %}">
+                    View project
+                </a>
+            </article>
+
+            <article class="project-card">
+                <p class="project-type">Multi-cloud system</p>
+                <h3>Aussie EcoLens</h3>
+
+                <p>
+                    A media-analysis platform using services across AWS,
+                    Google Cloud and Azure.
+                </p>
+
+                <a href="{% url 'core:projects' %}">
+                    View project
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
