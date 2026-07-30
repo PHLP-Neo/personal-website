@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "core",
     "projects",
     "notes",
+    "contact",
 ]
 
 MIDDLEWARE = [
