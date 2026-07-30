@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ project.title }} | Neo Ni
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-lg-9">
+                <p class="section-eyebrow">
+                    Project case study
+                </p>
+
+                <h1 class="display-3 fw-bold">
+                    {{ project.title }}
+                </h1>
+
+                <p class="lead text-secondary page-description">
+                    {{ project.short_description }}
+                </p>
+
+                {% if project.technology_list %}
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    {% for technology in project.technology_list %}
+                    <span class="badge project-badge">
+                        {{ technology }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-12 col-lg-8">
+                {% if project.thumbnail %}
+                <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-detail-image mb-5">
+                {% endif %}
+
+                <article class="project-description">
+                    <h2>Overview</h2>
+
+                    {{ project.description|linebreaks }}
+
+                    {% if project.role %}
+                    <h2>My role</h2>
+
+                    <p>
+                        {{ project.role }}
+                    </p>
+                    {% endif %}
+                </article>
+
+                {% if project.report %}
+                <section class="mt-5">
+                    <h2>Full report</h2>
+
+                    <p class="text-secondary">
+                        The report can be read directly below or
+                        opened in a separate browser tab.
+                    </p>
+
+                    <div class="mb-3">
+                        <a href="{{ project.report.url }}" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-outline-light">
+                            Open report full screen
+                        </a>
+                    </div>
+
+                    <div class="report-viewer">
+                        <object data="{{ project.report.url }}" type="application/pdf">
+                            <p>
+                                This browser cannot display the PDF.
+
+                                <a href="{{ project.report.url }}">
+                                    Open the report
+                                </a>
+                            </p>
+                        </object>
+                    </div>
+                </section>
+                {% endif %}
+            </div>
+
+            <aside class="col-12 col-lg-4">
+                <div class="project-sidebar">
+                    <h2 class="h4">
+                        Project information
+                    </h2>
+
+                    <dl class="project-metadata">
+                        <div>
+                            <dt>Status</dt>
+                            <dd>{{ project.get_status_display }}</dd>
+                        </div>
+
+                        {% if project.created_at %}
+                        <div>
+                            <dt>Date</dt>
+                            <dd>
+                                {{ project.created_at|date:"F Y" }}
+                            </dd>
+                        </div>
+                        {% endif %}
+                    </dl>
+
+                    <div class="d-grid gap-2 mt-4">
+                        {% if project.repository_url %}
+                        <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-light">
+                            View source code
+                        </a>
+                        {% endif %}
+
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-outline-light">
+                            Open live application
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
