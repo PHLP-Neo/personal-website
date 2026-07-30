@@ -270,3 +270,44 @@ body {
 .note-content p {
     margin-bottom: 1.5rem;
 }
+
+.contact-sidebar {
+    position: sticky;
+    top: 100px;
+    padding: 1.5rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.form-label {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.form-control {
+    background-color: var(--background);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.form-control:focus {
+    background-color: var(--background);
+    color: var(--text);
+    border-color: #777777;
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: #777777;
+}
+
+.form-text {
+    color: var(--muted);
+}
+
+@media (max-width: 991px) {
+    .contact-sidebar {
+        position: static;
+    }
+}
