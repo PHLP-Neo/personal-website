@@ -1,0 +1,33 @@
+<header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+        <a class="site-logo" href="{% url 'core:home' %}">
+            Neo
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'core:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                Home
+            </a>
+
+            <a href="{% url 'core:about' %}"
+                class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                About
+            </a>
+
+            <a href="{% url 'core:projects' %}"
+                class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
+                Projects
+            </a>
+
+            <a href="{% url 'core:notes' %}"
+                class="{% if request.resolver_match.url_name == 'notes' %}active{% endif %}">
+                Notes
+            </a>
+
+            <a href="{% url 'core:contact' %}"
+                class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                Contact
+            </a>
+        </div>
+    </nav>
+</header>
