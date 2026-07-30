@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Neo Ni{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-lg-9">
+                <p class="section-eyebrow">
+                    Contact
+                </p>
+
+                <h1 class="display-3 fw-bold">
+                    Get in touch
+                </h1>
+
+                <p class="lead text-secondary page-description">
+                    Use this form to send me a message about projects,
+                    opportunities or technical discussions.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-12 col-lg-8">
+                <div class="contact-panel p-4 p-md-5">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {{ form.website }}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                            <p class="mb-0">
+                                {{ error }}
+                            </p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-4">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">
+                                Name
+                            </label>
+
+                            {{ form.name }}
+
+                            {% for error in form.name.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">
+                                Email
+                            </label>
+
+                            {{ form.email }}
+
+                            {% for error in form.email.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.subject.id_for_label }}" class="form-label">
+                                Subject
+                            </label>
+
+                            {{ form.subject }}
+
+                            {% for error in form.subject.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.message.id_for_label }}" class="form-label">
+                                Message
+                            </label>
+
+                            {{ form.message }}
+
+                            <div class="form-text">
+                                Maximum 5,000 characters.
+                            </div>
+
+                            {% for error in form.message.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn btn-light btn-lg">
+                            Send message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <aside class="col-12 col-lg-4">
+                <div class="contact-sidebar">
+                    <h2 class="h4">
+                        Other channels
+                    </h2>
+
+                    <p class="text-secondary">
+                        You can also find my work and professional
+                        information through these platforms.
+                    </p>
+
+                    <div class="d-grid gap-2">
+                        <a href="https://github.com/PHLP-Neo" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-outline-light">
+                            GitHub
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/neo-ni-3a14b6301" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-outline-light">
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
