@@ -27,8 +27,10 @@
                         Projects
                     </a>
 
-                    <a class="nav-link {% if request.resolver_match.url_name == 'notes' %}active{% endif %}"
-                        href="{% url 'core:notes' %}">
+                    <a class="nav-link
+                        {% if request.resolver_match.app_name == 'notes' %}
+                            active
+                        {% endif %}" href="{% url 'notes:list' %}">
                         Notes
                     </a>
 
