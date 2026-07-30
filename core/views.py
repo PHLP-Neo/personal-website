@@ -1,9 +1,20 @@
 from django.shortcuts import render
 
+from projects.models import Project
 
-# Create your views here.
+
 def home(request):
-    return render(request, "core/home.html")
+    featured_projects = Project.objects.filter(
+        featured=True,
+    )[:3]
+
+    return render(
+        request,
+        "core/home.html",
+        {
+            "featured_projects": featured_projects,
+        },
+    )
 
 
 def about(request):

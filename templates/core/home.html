@@ -48,64 +48,60 @@
             </h2>
         </div>
 
+        {% if featured_projects %}
         <div class="row g-4">
+            {% for project in featured_projects %}
             <div class="col-12 col-md-6 col-lg-4">
                 <article class="project-card h-100">
-                    <p class="project-type">
-                        Web application
-                    </p>
+                    {% if project.thumbnail %}
+                    <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" class="project-thumbnail">
+                    {% endif %}
 
-                    <h3>CS50W Image Gallery</h3>
+                    <div class="project-card-body">
+                        <p class="project-type">
+                            {{ project.get_status_display }}
+                        </p>
 
-                    <p>
-                        A Django image-sharing application with uploads,
-                        tags, comments, favourites and authentication.
-                    </p>
+                        <h3>
+                            {{ project.title }}
+                        </h3>
 
-                    <a href="{% url 'projects:list' %}">
-                        View project
-                    </a>
+                        <p>
+                            {{ project.short_description }}
+                        </p>
+
+                        {% if project.technology_list %}
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            {% for technology in project.technology_list %}
+                            <span class="badge project-badge">
+                                {{ technology }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mt-4">
+                            <a href="{{ project.get_absolute_url }}" class="btn btn-outline-light">
+                                View project
+                            </a>
+                        </div>
+                    </div>
                 </article>
             </div>
-
-            <div class="col-12 col-md-6 col-lg-4">
-                <article class="project-card h-100">
-                    <p class="project-type">
-                        Cloud infrastructure
-                    </p>
-
-                    <h3>YOLO FastAPI Platform</h3>
-
-                    <p>
-                        A containerised image-inference API deployed
-                        using Kubernetes, Terraform and Ansible.
-                    </p>
-
-                    <a href="{% url 'projects:list' %}">
-                        View project
-                    </a>
-                </article>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4">
-                <article class="project-card h-100">
-                    <p class="project-type">
-                        Multi-cloud system
-                    </p>
-
-                    <h3>Aussie EcoLens</h3>
-
-                    <p>
-                        A media-analysis platform using services across
-                        AWS, Google Cloud and Azure.
-                    </p>
-
-                    <a href="{% url 'projects:list' %}">
-                        View project
-                    </a>
-                </article>
-            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="empty-state text-center p-5">
+            <h3 class="h4">
+                No featured projects yet
+            </h3>
+
+            <p class="text-secondary mb-0">
+                Mark projects as featured in Django Admin
+                to display them here.
+            </p>
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
