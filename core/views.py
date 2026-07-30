@@ -21,9 +21,5 @@ def about(request):
     return render(request, "core/about.html")
 
 
-def notes(request):
-    return render(request, "core/notes.html")
-
-
 def contact(request):
     return render(request, "core/contact.html")
