@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Register Personal App
     "core",
     "projects",
+    "notes",
 ]
 
 MIDDLEWARE = [
