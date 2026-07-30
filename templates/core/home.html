@@ -3,83 +3,108 @@
 {% block title %}Home | Neo Ni{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="container hero-content">
-        <p class="eyebrow">
-            Backend · Cloud · Data
-        </p>
+<section class="hero-section">
+    <div class="container py-5">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-12 col-lg-9">
+                <p class="section-eyebrow">
+                    Backend · Cloud · Data
+                </p>
 
-        <h1>
-            Building practical software and cloud systems.
-        </h1>
+                <h1 class="display-2 fw-bold mb-4">
+                    Building practical software and cloud systems.
+                </h1>
 
-        <p class="hero-description">
-            I am Neo Ni, a Master of Information Technology student
-            based in Melbourne. My work focuses on backend development,
-            cloud infrastructure, web applications and data.
-        </p>
+                <p class="lead text-secondary hero-description">
+                    I am Neo Ni, a Master of Information Technology
+                    student based in Melbourne. My work focuses on
+                    backend development, cloud infrastructure,
+                    web applications and data.
+                </p>
 
-        <div class="button-group">
-            <a href="{% url 'core:projects' %}" class="button button-primary">
-                View projects
-            </a>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a href="{% url 'core:projects' %}" class="btn btn-light btn-lg">
+                        View projects
+                    </a>
 
-            <a href="{% url 'core:contact' %}" class="button button-secondary">
-                Contact
-            </a>
+                    <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-lg">
+                        Contact
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="section">
-    <div class="container">
-        <div class="section-heading">
-            <p class="eyebrow">Selected work</p>
-            <h2>Featured projects</h2>
+<section class="py-5">
+    <div class="container py-4">
+        <div class="mb-4">
+            <p class="section-eyebrow mb-2">
+                Selected work
+            </p>
+
+            <h2 class="display-5 fw-bold">
+                Featured projects
+            </h2>
         </div>
 
-        <div class="project-grid">
-            <article class="project-card">
-                <p class="project-type">Web application</p>
-                <h3>CS50W Image Gallery</h3>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <article class="project-card h-100">
+                    <p class="project-type">
+                        Web application
+                    </p>
 
-                <p>
-                    A Django image-sharing application with uploads,
-                    tags, comments, favourites and authentication.
-                </p>
+                    <h3>CS50W Image Gallery</h3>
 
-                <a href="{% url 'core:projects' %}">
-                    View project
-                </a>
-            </article>
+                    <p>
+                        A Django image-sharing application with uploads,
+                        tags, comments, favourites and authentication.
+                    </p>
 
-            <article class="project-card">
-                <p class="project-type">Cloud infrastructure</p>
-                <h3>YOLO FastAPI Platform</h3>
+                    <a href="{% url 'core:projects' %}">
+                        View project
+                    </a>
+                </article>
+            </div>
 
-                <p>
-                    A containerised image-inference API deployed using
-                    Kubernetes, Terraform and Ansible.
-                </p>
+            <div class="col-12 col-md-6 col-lg-4">
+                <article class="project-card h-100">
+                    <p class="project-type">
+                        Cloud infrastructure
+                    </p>
 
-                <a href="{% url 'core:projects' %}">
-                    View project
-                </a>
-            </article>
+                    <h3>YOLO FastAPI Platform</h3>
 
-            <article class="project-card">
-                <p class="project-type">Multi-cloud system</p>
-                <h3>Aussie EcoLens</h3>
+                    <p>
+                        A containerised image-inference API deployed
+                        using Kubernetes, Terraform and Ansible.
+                    </p>
 
-                <p>
-                    A media-analysis platform using services across AWS,
-                    Google Cloud and Azure.
-                </p>
+                    <a href="{% url 'core:projects' %}">
+                        View project
+                    </a>
+                </article>
+            </div>
 
-                <a href="{% url 'core:projects' %}">
-                    View project
-                </a>
-            </article>
+            <div class="col-12 col-md-6 col-lg-4">
+                <article class="project-card h-100">
+                    <p class="project-type">
+                        Multi-cloud system
+                    </p>
+
+                    <h3>Aussie EcoLens</h3>
+
+                    <p>
+                        A media-analysis platform using services across
+                        AWS, Google Cloud and Azure.
+                    </p>
+
+                    <a href="{% url 'core:projects' %}">
+                        View project
+                    </a>
+                </article>
+            </div>
         </div>
     </div>
 </section>

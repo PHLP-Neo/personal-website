@@ -14,20 +14,22 @@
         {% block title %}Neo Ni{% endblock %}
     </title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
-<body>
-    <div class="site-wrapper">
-        {% include "partials/navbar.html" %}
+<body class="d-flex flex-column min-vh-100">
+    {% include "partials/navbar.html" %}
 
-        <main class="site-main">
-            {% block content %}
-            {% endblock %}
-        </main>
+    <main class="flex-grow-1">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-        {% include "partials/footer.html" %}
-    </div>
+    {% include "partials/footer.html" %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
