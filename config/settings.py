@@ -50,6 +50,11 @@ CSRF_TRUSTED_ORIGINS = [
     if origin.strip()
 ]
 
+SITE_URL = os.getenv(
+    "SITE_URL",
+    "https://www.phlpneo.com",
+).rstrip("/")
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,6 +63,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sitemaps",
     "django.contrib.staticfiles",
     # Register Personal App
     "core",
@@ -88,6 +94,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.site_metadata",
             ],
         },
     },

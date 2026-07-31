@@ -4,6 +4,22 @@
 {{ post.title }} | Neo Ni
 {% endblock %}
 
+{% block meta_description %}{% if post.summary %}{{ post.summary }}{% else %}{{ post.body|striptags|truncatewords:30 }}{% endif %}{% endblock %}
+
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ post.title }} | Neo Ni{% endblock %}
+{% block og_description %}{% if post.summary %}{{ post.summary }}{% else %}{{ post.body|striptags|truncatewords:30 }}{% endif %}{% endblock %}
+{% block twitter_card %}{% if post.image %}summary_large_image{% else %}summary{% endif %}{% endblock %}
+{% block twitter_title %}{{ post.title }} | Neo Ni{% endblock %}
+{% block twitter_description %}{% if post.summary %}{{ post.summary }}{% else %}{{ post.body|striptags|truncatewords:30 }}{% endif %}{% endblock %}
+{% block social_image %}
+{% if post.image %}
+    <meta property="og:image" content="{{ site_url }}{{ post.image.url }}">
+    <meta property="og:image:alt" content="{{ post.title }}">
+    <meta name="twitter:image" content="{{ site_url }}{{ post.image.url }}">
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <article>
     <header class="page-header">

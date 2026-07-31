@@ -4,6 +4,22 @@
 {{ project.title }} | Neo Ni
 {% endblock %}
 
+{% block meta_description %}{{ project.short_description }}{% endblock %}
+
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ project.title }} | Neo Ni{% endblock %}
+{% block og_description %}{{ project.short_description }}{% endblock %}
+{% block twitter_card %}{% if project.thumbnail %}summary_large_image{% else %}summary{% endif %}{% endblock %}
+{% block twitter_title %}{{ project.title }} | Neo Ni{% endblock %}
+{% block twitter_description %}{{ project.short_description }}{% endblock %}
+{% block social_image %}
+{% if project.thumbnail %}
+    <meta property="og:image" content="{{ site_url }}{{ project.thumbnail.url }}">
+    <meta property="og:image:alt" content="{{ project.title }}">
+    <meta name="twitter:image" content="{{ site_url }}{{ project.thumbnail.url }}">
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <section class="page-header">
     <div class="container py-5">
