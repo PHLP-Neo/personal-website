@@ -9,6 +9,7 @@ from projects.models import Project
 @override_settings(
     SITE_URL="https://www.phlpneo.com",
     ALLOWED_HOSTS=["testserver", "www.phlpneo.com"],
+    SECURE_SSL_REDIRECT=False,
 )
 class SeoTests(TestCase):
     def setUp(self):

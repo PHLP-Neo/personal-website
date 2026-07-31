@@ -1,9 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .models import ContactMessage
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class ContactViewTests(TestCase):
     def test_contact_page_loads(self):
         response = self.client.get(reverse("contact:contact"))
