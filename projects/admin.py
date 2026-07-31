@@ -30,7 +30,49 @@ class ProjectAdmin(admin.ModelAdmin):
         "slug": ("title",),
     }
 
-    ordering = (
-        "display_order",
-        "-created_at",
+    fieldsets = (
+        (
+            "Basic Information",
+            {
+                "fields": (
+                    "title",
+                    "slug",
+                    "short_description",
+                    "description",
+                    "role",
+                    "technologies",
+                )
+            },
+        ),
+        (
+            "Media",
+            {
+                "fields": (
+                    "thumbnail",
+                    "report",
+                )
+            },
+        ),
+        (
+            "Links",
+            {
+                "fields": (
+                    "repository_url",
+                    "live_url",
+                    "demo_url",
+                    "demo_description",
+                )
+            },
+        ),
+        (
+            "Publishing",
+            {
+                "fields": (
+                    "status",
+                    "featured",
+                    "display_order",
+                    "created_at",
+                )
+            },
+        ),
     )
