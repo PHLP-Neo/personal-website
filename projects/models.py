@@ -60,10 +60,21 @@ class Project(models.Model):
         blank=True,
     )
 
+    demo_url = models.URLField(
+        blank=True, 
+        null=True
+    )
+
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
         default=Status.COMPLETED,
+    )
+
+    demo_description = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Example: YouTube walkthrough, architecture demo, live recording.",
     )
 
     featured = models.BooleanField(
