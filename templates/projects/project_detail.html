@@ -111,19 +111,33 @@
                     </dl>
 
                     <div class="d-grid gap-2 mt-4">
+                    
                         {% if project.repository_url %}
-                        <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer"
-                            class="btn btn-light">
+                        <a href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-light">
                             View source code
                         </a>
                         {% endif %}
-
+                    
+                    
                         {% if project.live_url %}
-                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer"
-                            class="btn btn-outline-light">
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
                             Open live application
                         </a>
                         {% endif %}
+                    
+                    
+                        {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-danger">
+                            Watch demo
+                        </a>
+                    
+                        {% if project.demo_description %}
+                        <p class="small text-secondary mt-2 mb-0">
+                            {{ project.demo_description }}
+                        </p>
+                        {% endif %}
+                    
+                        {% endif %}              
                     </div>
                 </div>
             </aside>
