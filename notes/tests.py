@@ -1,3 +1,7 @@
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from django.core.files.base import ContentFile
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
@@ -102,3 +106,82 @@ class MarkdownRenderingTests(TestCase):
             "![Animated demonstration]"
             "(/media/notes/attachments/attachment-test/demo.gif)",
         )
+
+
+class NoteMediaCleanupTests(TestCase):
+    def setUp(self):
+        self.media_directory = TemporaryDirectory()
+        self.settings_override = override_settings(
+            MEDIA_ROOT=self.media_directory.name,
+        )
+        self.settings_override.enable()
+
+    def tearDown(self):
+        self.settings_override.disable()
+        self.media_directory.cleanup()
+
+    def _post(self, slug="cleanup-test"):
+        return Post.objects.create(
+            title="Cleanup test",
+            slug=slug,
+            body="Test",
+        )
+
+    def test_deleting_attachment_removes_its_file_after_commit(self):
+        post = self._post()
+        attachment = PostAttachment(post=post, alt_text="Test image")
+        attachment.image.save(
+            "attachment.gif",
+            ContentFile(b"GIF89a-test"),
+            save=True,
+        )
+        image_path = Path(attachment.image.path)
+
+        self.assertTrue(image_path.exists())
+
+        with self.captureOnCommitCallbacks(execute=True):
+            attachment.delete()
+
+        self.assertFalse(image_path.exists())
+
+    def test_deleting_post_removes_cover_and_attachment_files(self):
+        post = self._post()
+        post.image.save(
+            "cover.gif",
+            ContentFile(b"GIF89a-cover"),
+            save=True,
+        )
+        attachment = PostAttachment(post=post, alt_text="Test image")
+        attachment.image.save(
+            "attachment.gif",
+            ContentFile(b"GIF89a-attachment"),
+            save=True,
+        )
+        cover_path = Path(post.image.path)
+        attachment_path = Path(attachment.image.path)
+
+        with self.captureOnCommitCallbacks(execute=True):
+            post.delete()
+
+        self.assertFalse(cover_path.exists())
+        self.assertFalse(attachment_path.exists())
+
+    def test_replacing_attachment_removes_previous_file(self):
+        post = self._post()
+        attachment = PostAttachment(post=post, alt_text="Test image")
+        attachment.image.save(
+            "old.gif",
+            ContentFile(b"GIF89a-old"),
+            save=True,
+        )
+        old_path = Path(attachment.image.path)
+
+        with self.captureOnCommitCallbacks(execute=True):
+            attachment.image.save(
+                "new.gif",
+                ContentFile(b"GIF89a-new"),
+                save=True,
+            )
+
+        self.assertFalse(old_path.exists())
+        self.assertTrue(Path(attachment.image.path).exists())
