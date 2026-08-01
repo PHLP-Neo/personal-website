@@ -51,6 +51,14 @@ class SeoTests(TestCase):
         )
         self.assertContains(response, '"@type": "Person"')
         self.assertContains(response, '"@type": "WebSite"')
+        self.assertContains(
+            response,
+            "https://www.linkedin.com/in/phlp-neo",
+        )
+        self.assertNotContains(
+            response,
+            "https://www.linkedin.com/in/neo-ni-3a14b6301",
+        )
 
     def test_project_detail_uses_project_metadata(self):
         response = self.client.get(self.project.get_absolute_url())
