@@ -29,6 +29,17 @@ class ContactMessage(models.Model):
         default=False,
     )
 
+    notification_sent_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="When the owner notification email was sent successfully.",
+    )
+
+    notification_error = models.TextField(
+        blank=True,
+        help_text="The most recent notification delivery error.",
+    )
+
     class Meta:
         ordering = ["-created_at"]
 

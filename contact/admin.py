@@ -10,6 +10,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "name",
         "email",
         "created_at",
+        "notification_sent",
         "read",
         "archived",
     )
@@ -33,6 +34,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "subject",
         "message",
         "created_at",
+        "notification_sent_at",
+        "notification_error",
     )
 
     ordering = ("-created_at",)
@@ -42,6 +45,10 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "mark_as_unread",
         "archive_messages",
     ]
+
+    @admin.display(boolean=True, description="Email sent")
+    def notification_sent(self, message):
+        return message.notification_sent_at is not None
 
     @admin.action(description="Mark selected messages as read")
     def mark_as_read(self, request, queryset):

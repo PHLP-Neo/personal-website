@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New contact message</title>
+</head>
+<body style="margin: 0; padding: 24px; background: #f3f4f6; color: #111827; font-family: Arial, sans-serif;">
+    <div style="max-width: 640px; margin: 0 auto; padding: 32px; background: #ffffff; border-radius: 12px;">
+        <h1 style="margin-top: 0; font-size: 24px;">
+            New contact message
+        </h1>
+
+        <table style="width: 100%; margin-bottom: 24px; border-collapse: collapse;">
+            <tr>
+                <th style="padding: 6px 12px 6px 0; text-align: left; vertical-align: top;">Name</th>
+                <td style="padding: 6px 0;">{{ contact_message.name }}</td>
+            </tr>
+            <tr>
+                <th style="padding: 6px 12px 6px 0; text-align: left; vertical-align: top;">Email</th>
+                <td style="padding: 6px 0;">{{ contact_message.email }}</td>
+            </tr>
+            <tr>
+                <th style="padding: 6px 12px 6px 0; text-align: left; vertical-align: top;">Subject</th>
+                <td style="padding: 6px 0;">{{ contact_message.subject }}</td>
+            </tr>
+            <tr>
+                <th style="padding: 6px 12px 6px 0; text-align: left; vertical-align: top;">Received</th>
+                <td style="padding: 6px 0;">{{ contact_message.created_at|date:"j F Y, H:i T" }}</td>
+            </tr>
+        </table>
+
+        <div style="padding: 20px; border-left: 4px solid #374151; background: #f9fafb; white-space: pre-wrap;">{{ contact_message.message }}</div>
+
+        <p style="margin: 24px 0 0; color: #4b5563;">
+            Reply to this email to respond directly to {{ contact_message.name }}.
+        </p>
+    </div>
+</body>
+</html>

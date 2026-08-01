@@ -1,0 +1,11 @@
+New contact message from phlpneo.com
+
+Name: {{ contact_message.name }}
+Email: {{ contact_message.email }}
+Subject: {{ contact_message.subject }}
+Received: {{ contact_message.created_at|date:"j F Y, H:i T" }}
+
+Message:
+{{ contact_message.message }}
+
+Reply to this email to respond directly to {{ contact_message.name }}.

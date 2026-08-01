@@ -58,6 +58,7 @@ SITE_URL = os.getenv(
 # Application definition
 
 INSTALLED_APPS = [
+    "anymail",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -158,6 +159,33 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+EMAIL_BACKEND = os.getenv(
+    "DJANGO_EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend",
+)
+
+ANYMAIL = {
+    "RESEND_API_KEY": os.getenv("RESEND_API_KEY", ""),
+}
+
+DEFAULT_FROM_EMAIL = os.getenv(
+    "DEFAULT_FROM_EMAIL",
+    "Neo Portfolio <website@send.phlpneo.com>",
+)
+
+CONTACT_NOTIFICATION_EMAIL = os.getenv(
+    "CONTACT_NOTIFICATION_EMAIL",
+    "",
+)
+
+CONTACT_RATE_LIMIT = int(
+    os.getenv("CONTACT_RATE_LIMIT", "5")
+)
+
+CONTACT_RATE_LIMIT_WINDOW = int(
+    os.getenv("CONTACT_RATE_LIMIT_WINDOW", "3600")
+)
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = (
