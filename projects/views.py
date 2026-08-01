@@ -1,16 +1,20 @@
 from django.shortcuts import get_object_or_404, render
 
+from core.pagination import paginate
+
 from .models import Project
 
 
 def project_list(request):
     projects = Project.objects.all()
+    pagination = paginate(request, projects, per_page=6)
 
     return render(
         request,
         "projects/project_list.html",
         {
-            "projects": projects,
+            "projects": pagination["page_obj"].object_list,
+            **pagination,
         },
     )
 

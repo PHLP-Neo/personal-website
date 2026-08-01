@@ -9,6 +9,11 @@
 {% block twitter_title %}Projects and Technical Case Studies | Neo Ni{% endblock %}
 {% block twitter_description %}Backend, cloud, web application and data projects by Neo Ni.{% endblock %}
 
+{% block pagination_links %}
+{% if pagination_previous_url %}<link rel="prev" href="{{ pagination_previous_url }}">{% endif %}
+{% if pagination_next_url %}<link rel="next" href="{{ pagination_next_url }}">{% endif %}
+{% endblock %}
+
 {% block content %}
 <section class="page-header">
     <div class="container py-5">
@@ -83,6 +88,7 @@
             </div>
             {% endfor %}
         </div>
+        {% include "partials/pagination.html" with pagination_label="Project pages" %}
         {% else %}
         <div class="empty-state text-center p-5">
             <h2 class="h3">

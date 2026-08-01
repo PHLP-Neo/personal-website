@@ -306,6 +306,24 @@ body {
     color: var(--muted);
 }
 
+.pagination {
+    --bs-pagination-bg: var(--surface);
+    --bs-pagination-border-color: var(--border);
+    --bs-pagination-color: var(--text);
+    --bs-pagination-hover-bg: #303030;
+    --bs-pagination-hover-border-color: #555555;
+    --bs-pagination-hover-color: #ffffff;
+    --bs-pagination-focus-bg: #303030;
+    --bs-pagination-focus-color: #ffffff;
+    --bs-pagination-focus-box-shadow: none;
+    --bs-pagination-active-bg: #f8f9fa;
+    --bs-pagination-active-border-color: #f8f9fa;
+    --bs-pagination-active-color: #111111;
+    --bs-pagination-disabled-bg: #191919;
+    --bs-pagination-disabled-border-color: var(--border);
+    --bs-pagination-disabled-color: #777777;
+}
+
 @media (max-width: 991px) {
     .contact-sidebar {
         position: static;

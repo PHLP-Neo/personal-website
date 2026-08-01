@@ -18,6 +18,8 @@
 
     <link rel="canonical" href="{{ canonical_url }}">
 
+    {% block pagination_links %}{% endblock %}
+
     <meta property="og:site_name" content="Neo Ni">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:title" content="{% block og_title %}Neo Ni | Backend, Cloud &amp; Data Developer{% endblock %}">
