@@ -271,6 +271,89 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.note-content h2,
+.note-content h3,
+.note-content h4,
+.note-content h5,
+.note-content h6 {
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.note-content a {
+    color: #d8d8d8;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+}
+
+.note-content img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.note-content blockquote {
+    margin: 2rem 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 4px solid #666666;
+    color: #c4c4c4;
+}
+
+.note-content pre {
+    overflow-x: auto;
+    margin: 1.75rem 0;
+    padding: 1.25rem;
+    background: #151515;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.note-content code {
+    color: #f1f1f1;
+    overflow-wrap: anywhere;
+}
+
+.note-content table {
+    width: 100%;
+    margin: 2rem 0;
+    border-collapse: collapse;
+}
+
+.note-content th,
+.note-content td {
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.note-content th {
+    color: var(--text);
+    background: var(--surface);
+}
+
+.note-video {
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+    padding-top: 56.25%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.note-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 .contact-sidebar {
     position: sticky;
     top: 100px;
