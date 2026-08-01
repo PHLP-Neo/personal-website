@@ -119,7 +119,26 @@
                             {% endfor %}
                         </div>
 
-                        <button type="submit" class="btn btn-light btn-lg">
+                        {% if turnstile_site_key %}
+                        <div class="mb-4">
+                            <div class="cf-turnstile"
+                                data-sitekey="{{ turnstile_site_key }}"
+                                data-theme="auto">
+                            </div>
+                            <noscript>
+                                <p class="text-warning mb-0">
+                                    JavaScript is required for human verification.
+                                </p>
+                            </noscript>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            This contact form is temporarily unavailable.
+                        </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-light btn-lg"
+                            {% if not turnstile_site_key %}disabled{% endif %}>
                             Send message
                         </button>
                     </form>
@@ -153,4 +172,7 @@
         </div>
     </div>
 </section>
+{% if turnstile_site_key %}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{% endif %}
 {% endblock %}

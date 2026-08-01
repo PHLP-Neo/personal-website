@@ -187,6 +187,13 @@ CONTACT_RATE_LIMIT_WINDOW = int(
     os.getenv("CONTACT_RATE_LIMIT_WINDOW", "3600")
 )
 
+TURNSTILE_SITE_KEY = os.getenv("TURNSTILE_SITE_KEY", "")
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY", "")
+TURNSTILE_EXPECTED_HOSTNAME = os.getenv(
+    "TURNSTILE_EXPECTED_HOSTNAME",
+    "www.phlpneo.com",
+)
+
 if not DEBUG:
     SECURE_SSL_REDIRECT = (
         os.getenv(
