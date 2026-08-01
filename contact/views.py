@@ -16,45 +16,39 @@ def _client_ip(request):
 
 
 def contact(request):
+    response_status = 200
+
     if request.method == "POST":
         form = ContactMessageForm(request.POST)
 
-        if not allow_contact_submission(request):
-            form.add_error(
-                None,
-                "Too many submissions. Please try again later.",
-            )
-
-            return render(
-                request,
-                "contact/contact.html",
-                {
-                    "form": form,
-                    "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
-                },
-                status=429,
-            )
-
-        if form.is_valid() and not verify_turnstile(
-            request.POST.get("cf-turnstile-response", ""),
-            _client_ip(request),
-        ):
-            form.add_error(
-                None,
-                "Human verification failed. Please try again.",
-            )
-
         if form.is_valid():
-            contact_message = form.save()
-
-            send_contact_notification(contact_message)
-
-            messages.success(
-                request,
-                "Your message has been submitted successfully.",
+            turnstile_valid = verify_turnstile(
+                request.POST.get("cf-turnstile-response", ""),
+                _client_ip(request),
             )
 
-            return redirect("contact:contact")
+            if not turnstile_valid:
+                form.add_error(
+                    None,
+                    "Human verification failed. Please try again.",
+                )
+            elif not allow_contact_submission(request):
+                form.add_error(
+                    None,
+                    "Too many submissions. Please try again later.",
+                )
+                response_status = 429
+            else:
+                contact_message = form.save()
+
+                send_contact_notification(contact_message)
+
+                messages.success(
+                    request,
+                    "Your message has been submitted successfully.",
+                )
+
+                return redirect("contact:contact")
 
     else:
         form = ContactMessageForm()
@@ -66,4 +60,5 @@ def contact(request):
             "form": form,
             "turnstile_site_key": settings.TURNSTILE_SITE_KEY,
         },
+        status=response_status,
     )

@@ -1,4 +1,5 @@
 import io
+from urllib.error import HTTPError
 from unittest.mock import patch
 
 from django.core import mail
@@ -123,6 +124,32 @@ class ContactViewTests(TestCase):
         self.assertContains(response, "Human verification failed")
         self.assertEqual(ContactMessage.objects.count(), 0)
 
+    @override_settings(CONTACT_RATE_LIMIT=1)
+    @patch(
+        "contact.views.verify_turnstile",
+        side_effect=[False, False, True],
+    )
+    def test_failed_verification_does_not_consume_submission_limit(self, verify):
+        payload = {
+            "name": "Test User",
+            "email": "test@example.com",
+            "subject": "Test subject",
+            "message": "Test message",
+            "website": "",
+            "cf-turnstile-response": "token",
+        }
+
+        self.client.post(reverse("contact:contact"), payload)
+        self.client.post(reverse("contact:contact"), payload)
+        response = self.client.post(
+            reverse("contact:contact"),
+            payload,
+            follow=True,
+        )
+
+        self.assertContains(response, "submitted successfully")
+        self.assertEqual(ContactMessage.objects.count(), 1)
+
     def test_honeypot_submission_is_rejected(self):
         self.client.post(
             reverse("contact:contact"),
@@ -138,13 +165,15 @@ class ContactViewTests(TestCase):
         self.assertEqual(ContactMessage.objects.count(), 0)
 
     @override_settings(CONTACT_RATE_LIMIT=2)
-    def test_excessive_contact_attempts_are_throttled(self):
+    @patch("contact.views.verify_turnstile", return_value=True)
+    def test_excessive_contact_attempts_are_throttled(self, verify):
         payload = {
             "name": "Test User",
-            "email": "invalid-email",
+            "email": "test@example.com",
             "subject": "Test subject",
             "message": "Test message",
             "website": "",
+            "cf-turnstile-response": "valid-token",
         }
 
         self.client.post(
@@ -169,7 +198,7 @@ class ContactViewTests(TestCase):
             "Too many submissions",
             status_code=429,
         )
-        self.assertEqual(ContactMessage.objects.count(), 0)
+        self.assertEqual(ContactMessage.objects.count(), 2)
 
 
 @override_settings(
@@ -195,3 +224,23 @@ class TurnstileVerificationTests(TestCase):
 
     def test_missing_token_is_rejected(self):
         self.assertFalse(verify_turnstile("", "192.0.2.1"))
+
+    @patch("contact.turnstile.urlopen")
+    def test_cloudflare_error_code_is_logged_safely(self, urlopen):
+        urlopen.side_effect = HTTPError(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            400,
+            "Bad Request",
+            {},
+            io.BytesIO(
+                b'{"success": false, "error-codes": ["invalid-input-secret"]}'
+            ),
+        )
+
+        with self.assertLogs("contact.turnstile", level="WARNING") as logs:
+            result = verify_turnstile("private-token", "192.0.2.1")
+
+        self.assertFalse(result)
+        self.assertIn("invalid-input-secret", logs.output[0])
+        self.assertNotIn("private-token", logs.output[0])
+        self.assertNotIn("test-secret", logs.output[0])
