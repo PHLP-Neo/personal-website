@@ -1,5 +1,8 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 from django.urls import reverse
+
+from .validators import validate_project_report_size
 
 
 class Project(models.Model):
@@ -49,7 +52,11 @@ class Project(models.Model):
         upload_to="projects/reports/",
         blank=True,
         null=True,
-        help_text="Optional PDF report.",
+        validators=[
+            FileExtensionValidator(allowed_extensions=["pdf"]),
+            validate_project_report_size,
+        ],
+        help_text="Optional PDF report. Maximum file size: 50 MB.",
     )
 
     repository_url = models.URLField(
