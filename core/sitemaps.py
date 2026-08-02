@@ -12,6 +12,7 @@ class StaticViewSitemap(Sitemap):
         return [
             "core:home",
             "core:about",
+            "core:special_thanks",
             "projects:list",
             "notes:list",
             "contact:contact",
@@ -25,6 +26,7 @@ class StaticViewSitemap(Sitemap):
             "core:home": 1.0,
             "projects:list": 0.8,
             "notes:list": 0.7,
+            "core:special_thanks": 0.3,
         }
         return priorities.get(item, 0.5)
 

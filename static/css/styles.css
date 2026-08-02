@@ -65,6 +65,7 @@ body {
 
 .project-card,
 .skill-card,
+.thanks-card,
 .empty-state,
 .contact-panel {
     height: 100%;
@@ -74,14 +75,22 @@ body {
 }
 
 .skill-card,
+.thanks-card,
 .empty-state,
 .contact-panel {
     padding: 1.5rem;
 }
 
 .project-card p,
-.skill-card p {
+.skill-card p,
+.thanks-card p {
     color: var(--muted);
+}
+
+.thanks-card a {
+    color: var(--text);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
 }
 
 .project-card a {

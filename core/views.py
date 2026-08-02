@@ -22,6 +22,10 @@ def about(request):
     return render(request, "core/about.html")
 
 
+def special_thanks(request):
+    return render(request, "core/special_thanks.html")
+
+
 def health(request):
     return JsonResponse(
         {

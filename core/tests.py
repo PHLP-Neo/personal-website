@@ -77,6 +77,7 @@ class SeoTests(TestCase):
     def test_public_page_templates_render(self):
         public_urls = [
             reverse("core:about"),
+            reverse("core:special_thanks"),
             reverse("projects:list"),
             reverse("notes:list"),
             self.published_post.get_absolute_url(),
@@ -88,6 +89,34 @@ class SeoTests(TestCase):
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
                 self.assertContains(response, '<link rel="canonical"')
+
+    def test_footer_links_to_special_thanks_page(self):
+        response = self.client.get(reverse("core:home"))
+
+        self.assertContains(
+            response,
+            f'href="{reverse("core:special_thanks")}"',
+        )
+        self.assertContains(response, "Neo Ni")
+
+    def test_special_thanks_page_lists_acknowledgements(self):
+        response = self.client.get(reverse("core:special_thanks"))
+
+        self.assertEqual(response.status_code, 200)
+        for name in (
+            "Kris Zhang",
+            "JinYuanCheng",
+            "Pengmu",
+            "David J. Malan",
+            "Oracle",
+            "My parents",
+            "羽",
+            "小白",
+            "Wan",
+            "Viz",
+        ):
+            with self.subTest(name=name):
+                self.assertContains(response, name)
 
     def test_robots_file_allows_public_pages_and_points_to_sitemap(self):
         response = self.client.get(reverse("robots_txt"))
@@ -116,6 +145,10 @@ class SeoTests(TestCase):
         self.assertContains(
             response,
             "https://www.phlpneo.com/notes/published-note/",
+        )
+        self.assertContains(
+            response,
+            "https://www.phlpneo.com/special-thanks/",
         )
         self.assertNotContains(
             response,
